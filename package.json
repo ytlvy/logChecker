@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "KWLog inspector",
   "dependencies": {
-    "express": "^4.0.0",
     "angular-websocket": "^2.0.1",
-    "ws": "^3.2.0",
     "body-parser": "~1.15.2",
     "ejs": "~2.5.2",
-    "express-session": "^1.14.2"
+    "express": "^4.0.0",
+    "express-session": "^1.14.2",
+    "express-ws": "^3.0.0",
+    "ws": "^3.2.0"
   },
   "devDependencies": {},
   "main": "app.js",
