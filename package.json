@@ -1,0 +1,21 @@
+{
+  "name": "kwlog",
+  "version": "1.0.0",
+  "description": "KWLog inspector",
+  "dependencies": {
+    "express": "^4.0.0",
+    "angular-websocket": "^2.0.1",
+    "ws": "^3.2.0",
+    "body-parser": "~1.15.2",
+    "ejs": "~2.5.2",
+    "express-session": "^1.14.2"
+  },
+  "devDependencies": {},
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gyj",
+  "license": "ISC"
+}
