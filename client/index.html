@@ -25,21 +25,20 @@
     <body style="height:100%" class ="palette palette-clouds" ng-controller="indexController">
         <h2 style="text-align: center;">酷我日志监测</h2>
 
-        <section  class="row palette palette-clouds">
-            <div class="col-xs-1"><span>过滤</span></div>
-            <div class="col-xs-3">
-              <select class="form-control select select-primary" data-toggle="select" ng-init="selectedName = actions[0]" ng-model="selectedName" ng-options="x for x in actions">
-              </select>
-            </div>
 
-            <div class="col-xs-3">
-              <div class="form-group has-success">
-                <input type="text" value="" placeholder="VIDEO_LOG" class="form-control" ng-model="filterValue"  />
-                <span class="input-icon fui-check-inverted"></span>
-              </div>
-            </div>
-            <div class="col-xs-3">
-              <a href="#fakelink" class="btn btn-block btn-lg btn-primary" ng-click="doFilter()">only show</a>
+        <section  class="palette palette-clouds ">
+
+            <!--<h3 class="demo-panel-title">过滤</h3>-->
+            <div class="row demo-row">
+                <div class="col-xs-3">
+                  <div class=" has-success">
+                    <input type="text" value="" placeholder="VIDEO_LOG" class="form-control" ng-model="filterValue"  />
+                    <span class="input-icon fui-check-inverted"></span>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <a href="#fakelink" class="btn btn-block btn-lg btn-primary" ng-click="doFilter()">only show</a>
+                </div>
             </div>
         </section>
 

@@ -3,8 +3,7 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
     $scope.MyData = MyData;
     $scope.glued = true;
 
-    $scope.actions = ["ACT", "EVENT"];
-    $scope.filterValue = "";
+    $scope.filterValue = "ACT:VIDEO_LOG";
     var isFileter = false;
 
     $scope.myfilter = function (msg) {
