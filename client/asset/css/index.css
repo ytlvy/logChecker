@@ -3,16 +3,25 @@
 [scroll-glue]{
   height: 600px;
   overflow-y: scroll;
-  border: 1px solid gray;
+  border: 0px solid gray;
 }
 [scroll-glue-left],
 [scroll-glue-right]{
   width: 100px;
   overflow-x: scroll;
-  border: 1px solid gray;
+  border: 0px solid gray;
   padding: 10px;
 }
 [scroll-glue-left] span,
 [scroll-glue-right] span{
-  border: 1px solid black;
+  border: 0px solid black;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
 }

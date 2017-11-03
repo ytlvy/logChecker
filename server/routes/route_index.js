@@ -8,14 +8,12 @@ router.get('/', function(req, res, next) {
     res.sendFile('../static/index.html');
 }).post('/', function(req, res, next) {
     req.setEncoding('utf8');
-    var data = req.body;
 
     console.log('RB: ' + req.rawBody);
-    if (req.connections.length > 0) {
-        for (idx in req.connections) {
-            req.connections[idx].send(req.rawBody);
-        }
+    for (var i = req.connections.length - 1; i >= 0; i--) {
+        req.connections[i].send(req.rawBody);
     }
+    
     return res.send({
         status: 200
     });

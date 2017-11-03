@@ -2,25 +2,50 @@
 <html ng-app="LogChecker">
     <head>
         <title>Hello AngularJS</title>
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="./asset/css/flat-ui.css" rel="stylesheet">
+
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="./asset/js/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <script src="./asset/js/jquery.min.js"></script>
+        <script src="./asset/js/flat-ui.min.js"></script>
         <script src="./asset/js/angular.min.js"></script>
         <script src="./asset/js/angular-websocket.js"></script>
         <script src="./asset/js/scrollglue.js"></script>
         <script src="./asset/js/index.js"></script>
+        <script data-require="angular-sanitize.js@1.2.0-rc.3" data-semver="1.2.0-rc.3" src="https://code.angularjs.org/1.2.0-rc.3/angular-sanitize.js"></script>
 
         <link href="./asset/css/index.css" rel="stylesheet">
 
         <script src="./service/index_service.js"></script>
     </head>
 
-    <body>
-        <!-- <div ng-controller="Hello">
-            <p>The ID is {{greeting.id}}</p>
-            <p>The content is {{greeting.content}}</p>
-        </div> -->
+    <body style="height:100%" class ="palette palette-clouds" ng-controller="indexController">
+        <h2 style="text-align: center;">酷我日志监测</h2>
 
-        <section ng-controller="SomeController" scroll-glue>
-            <ul ng-repeat="data in MyData.collection" >
-              <li> {{ data.content }} </li>
+        <section  class="row palette palette-clouds">
+            <div class="col-xs-1"><span>过滤</span></div>
+            <div class="col-xs-3">
+              <select class="form-control select select-primary" data-toggle="select" ng-init="selectedName = actions[0]" ng-model="selectedName" ng-options="x for x in actions">
+              </select>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="form-group has-success">
+                <input type="text" value="" placeholder="VIDEO_LOG" class="form-control" ng-model="filterValue"  />
+                <span class="input-icon fui-check-inverted"></span>
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <a href="#fakelink" class="btn btn-block btn-lg btn-primary" ng-click="doFilter()">only show</a>
+            </div>
+        </section>
+
+        <section class="palette palette-clouds"  scroll-glue>
+            <ul ng-repeat="data in MyData.collection | filter: myfilter" >
+              <li class="palette palette-asbestos" ng-bind-html="(data.content | htmlTrust)"> {{data.timeStamp}} </li>
             </ul>
         </section>
     </body>
