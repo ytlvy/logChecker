@@ -1,4 +1,6 @@
-angular.module('LogChecker', ['ngWebSocket']).factory('MyData', function($websocket) {
+var index = angular.module('services.index', []);
+
+index.factory('MyData', function($websocket) {
     // Open a WebSocket connection
     var ws = $websocket('ws://localhost:8888/');
     var collection = [];
@@ -28,9 +30,7 @@ angular.module('LogChecker', ['ngWebSocket']).factory('MyData', function($websoc
     ws.onOpen(function() {
         console.log('connection open111');
         console.log(ws);
-        ws.send('Hello World');
-        ws.send('again');
-        ws.send('and again');
+        ws.send('ws client connect success');
     });
     // setTimeout(function() {
     //   ws.close();
@@ -48,6 +48,4 @@ angular.module('LogChecker', ['ngWebSocket']).factory('MyData', function($websoc
             }
         }
     };
-}).controller('SomeController', function($scope, MyData) {
-    $scope.MyData = MyData;
-});
+})

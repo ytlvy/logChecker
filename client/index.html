@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="LogChecker">
+    <head>
+        <title>Hello AngularJS</title>
+        <script src="./asset/js/angular.min.js"></script>
+        <script src="./asset/js/angular-websocket.js"></script>
+        <script src="./asset/js/scrollglue.js"></script>
+        <script src="./asset/js/index.js"></script>
+
+        <link href="./asset/css/index.css" rel="stylesheet">
+
+        <script src="./service/index_service.js"></script>
+    </head>
+
+    <body>
+        <!-- <div ng-controller="Hello">
+            <p>The ID is {{greeting.id}}</p>
+            <p>The content is {{greeting.content}}</p>
+        </div> -->
+
+        <section ng-controller="SomeController" scroll-glue>
+            <ul ng-repeat="data in MyData.collection" >
+              <li> {{ data.content }} </li>
+            </ul>
+        </section>
+    </body>
+</html>

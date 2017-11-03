@@ -17,11 +17,11 @@ var connections = [];
 
 // server configure
 // view engine setup
-app.set('views', path.join(__dirname, 'static'));
+app.set('views', path.join(__dirname, 'client'));
 app.set('view engine', 'ejs');
 
 // 静态资源目录
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 function rawBody(req, res, next) {
   req.setEncoding('utf8');
@@ -44,7 +44,7 @@ app.use(rawBody);
 // app.use(bodyParser.raw({ type: '*/*' }));
 
 // router 设置
-var index = require('./routes/index');
+var index = require('./server/routes/route_index');
 app.use('/', index);
 
 // catch 404 and forward to error handler
@@ -72,7 +72,7 @@ wss.on('connection', function connection(ws) {
     console.log('received: %s', message);
   });
 
-  ws.send('something');
+  ws.send('client connected');
 });
 
 if (module.parent) {
@@ -80,7 +80,7 @@ if (module.parent) {
 } else {
   // 监听端口，启动程序
   app.listen(8080, function listening() {
-      console.log('Listening on');
+      console.log('Listening on 8080');
   });
 }
 

@@ -12,7 +12,9 @@ router.get('/', function(req, res, next) {
 
     console.log('RB: ' + req.rawBody);
     if (req.connections.length > 0) {
-        req.connections[0].send(req.rawBody);
+        for (idx in req.connections) {
+            req.connections[idx].send(req.rawBody);
+        }
     }
     return res.send({
         status: 200
