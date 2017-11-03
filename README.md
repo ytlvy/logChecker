@@ -1,17 +1,27 @@
 ### install
 
-1.  install package
+1. install nodejs and npm
 
 ```
-npm install angular-websocket --save
-npm install --save ws
-npm install --save express-ws
+https://nodejs.org/zh-cn/
 ```
 
+mac
 ```
-npm install angular-websocket ws express-ws --save
+brew install npm
 ```
 
+2. install packages
+
+```
+npm install
+```
+
+2. run app
+
+```
+npm start
+```
 
 
 
