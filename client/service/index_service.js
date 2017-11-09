@@ -18,14 +18,21 @@ index.factory('MyData', function($websocket, $sce) {
 
         var colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot'];
 
-        var actpattern = /(.*?)(ACT[^|]+)(.*?)/g;
-        var eventpattern = /(.*?)(EVENT[^|]+)(.*?)/g;
+        var actpattern = /(.*?)(\W)(ACT[^|]+)(.*?)/g;
+        var eventpattern = /(.*?)(\W)(EVENT[^|]+)(.*?)/g;
+        var typepattern = /(.*?)(\W)(TYPE[^|]+)(.*?)/g;
+        var timepattern = /(.*?)(\W)(IS_TIMELINE[^|]+)(.*?)/g;
+        
 
-        var ignorepatter = /(REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE)[^|]*\|/g;
+        var ignorepatter = /\W(REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE)[^|]*\|/g;
 
-        var aHtml = res.message.replace(actpattern, "$1 <b class=\"" + colors[Math.floor(Math.random()*colors.length)]  +"\">$2</b> $3");
+        var replaceMent = "$1$2 <b class=\"" + colors[Math.floor(Math.random()*colors.length)]  +"\">$3</b> $4";
+        var aHtml = res.message.replace(actpattern, replaceMent);
        
-        aHtml = aHtml.replace(eventpattern, "$1 <b class=\"" + colors[Math.floor(Math.random()*colors.length)]  +"\"> $2 </b> $3");
+        aHtml = aHtml.replace(eventpattern, replaceMent);
+        aHtml = aHtml.replace(typepattern, replaceMent);
+        aHtml = aHtml.replace(timepattern, replaceMent);
+
         aHtml = aHtml.replace(ignorepatter, "");
 
         collection.push({
