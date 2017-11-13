@@ -65,6 +65,9 @@ index.factory('MyData', function($websocket, $sce) {
             } else if (angular.isObject(message)) {
                 ws.send(JSON.stringify(message));
             }
+        },
+        clear: function () {
+            collection.length = 0;
         }
     };
 })

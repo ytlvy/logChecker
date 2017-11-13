@@ -18,6 +18,10 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
         return msg.content.match(pattern);
     }
 
+    $scope.doClear = function () {
+        $scope.MyData.clear();
+    }
+
     $scope.doFilter = function (msg) {
         isFileter = true;
     }
