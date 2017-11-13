@@ -1,3 +1,8 @@
+### DESC
+
+这个工具是用来接收客户端日志HTTP POST转发, 并实时显示的
+
+
 ### install
 
 1. install nodejs and npm
@@ -23,8 +28,10 @@ npm install
 npm start
 ```
 
+or
+
 ```
-http://localhost:8080/
+./start
 ```
 
 
