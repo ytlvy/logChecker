@@ -48,7 +48,9 @@
 
         <section class="palette palette-clouds"  scroll-glue>
             <ul ng-repeat="data in MyData.collection | filter: myfilter" >
-              <li class="palette palette-asbestos" ng-bind-html="(data.content | htmlTrust)"> {{data.timeStamp}} </li>
+              <li class="palette palette-wet-asphalt" ng-if="data.content=='--'" style="text-align:center"> ------------------------------------------------------------------ 分割线 ------------------------------------------------------------------</li>
+              <li class="palette palette-asbestos" ng-if="data.content!='--'" ng-bind-html="(data.content | htmlTrust)"> {{data.timeStamp}} </li>
+              
             </ul>
         </section>
     </body>

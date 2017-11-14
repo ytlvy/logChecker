@@ -79,8 +79,8 @@ if (module.parent) {
   module.exports = app;
 } else {
   // 监听端口，启动程序
-  app.listen(8080, function listening() {
-      console.log('Listening on 8080');
+  app.listen(8090, function listening() {
+      console.log('Listening on 8090');
   });
 }
 

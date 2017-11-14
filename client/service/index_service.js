@@ -54,6 +54,16 @@ index.factory('MyData', function($websocket, $sce) {
     // setTimeout(function() {
     //   ws.close();
     // }, 500)
+    setInterval(function(){
+        if(collection[collection.length-1].content != "--") {
+            collection.push({
+                username: "--",
+                content: "--",
+                timeStamp: "---"
+            });
+        }
+    
+    }, 1000);
     return {
         collection: collection,
         status: function() {
