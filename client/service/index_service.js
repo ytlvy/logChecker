@@ -34,6 +34,7 @@ index.factory('MyData', function($websocket, $sce) {
         aHtml = aHtml.replace(timepattern, replaceMent);
 
         aHtml = aHtml.replace(ignorepatter, "");
+        aHtml = aHtml.replace("<PID", "PID");
 
         collection.push({
             username: res.username,
