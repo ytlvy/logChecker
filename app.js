@@ -11,6 +11,8 @@ var router = express.Router();
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8888 });
 
+process.title = "kwlog";
+
 // route
 var app = express();
 var connections = [];
