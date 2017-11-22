@@ -48,6 +48,7 @@ app.use(rawBody);
 // router 设置
 var index = require('./server/routes/route_index');
 app.use('/', index);
+// app.use('/debug', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -71,6 +72,13 @@ app.use(function(err, req, res, next) {
 wss.on('connection', function connection(ws) {
   connections.push(ws);
   ws.on('message', function incoming(message) {
+    // if(message.indexOf("serverLogClient") > -1) {
+    //   connections["serverLogClient"] = ws;
+    // }
+    // else if(message.indexOf("serverLogClient")>-1) {
+    //   connections["serverLogClient"] = ws;
+    // }
+
     console.log('received: %s', message);
   });
 

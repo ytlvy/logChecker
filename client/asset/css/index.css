@@ -377,3 +377,6 @@ ol.linenums {
   width: 140px;
   margin-left: 20px;
 }
+.demo-right {
+  float: right;
+}
