@@ -37,8 +37,12 @@ index.factory('MyData', function($websocket, $sce) {
         });
     };
 
+    var randomColor = function() {
+        let colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot'];
+        return colors[Math.floor(Math.random()*colors.length)];
+    }
+
     var paraseServerLog = function(message){
-        var colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot'];
 
         var actpattern = /(.*?)(\W)(ACT[^|]+)(.*?)/g;
         var eventpattern = /(.*?)(\W)(EVENT[^|]+)(.*?)/g;
@@ -48,13 +52,12 @@ index.factory('MyData', function($websocket, $sce) {
 
         var ignorepatter = /\W(REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE)[^|]*\|/g;
 
-        var replaceMent = "$1$2 <b class=\"" + colors[Math.floor(Math.random()*colors.length)]  +"\">$3</b> $4";
-        var aHtml = message.replace(actpattern, replaceMent);
+        var aHtml = message.replace(actpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
        
-        aHtml = aHtml.replace(eventpattern, replaceMent);
-        aHtml = aHtml.replace(typepattern, replaceMent);
-        aHtml = aHtml.replace(timepattern, replaceMent);
-        aHtml = aHtml.replace(psrcpattern, replaceMent);
+        aHtml = aHtml.replace(eventpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
+        aHtml = aHtml.replace(typepattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
+        aHtml = aHtml.replace(timepattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
+        aHtml = aHtml.replace(psrcpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
 
         aHtml = aHtml.replace(ignorepatter, "");
         aHtml = aHtml.replace("<PID", "PID");
