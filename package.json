@@ -8,6 +8,7 @@
     "ejs": "~2.5.2",
     "express": "^4.0.0",
     "express-session": "^1.14.2",
+    "js-base64": "^2.4.0",
     "ws": "^3.2.0"
   },
   "devDependencies": {},
@@ -16,7 +17,6 @@
     "start": "nohup node app.js 2>&1 > output &",
     "test": "echo \"Error: no test specified\" && exit 1",
     "stop": "pkill -f kwlog"
-
   },
   "author": "gyj",
   "license": "ISC"

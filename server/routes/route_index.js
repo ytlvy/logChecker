@@ -1,6 +1,7 @@
 var path = require('path');
 var express = require('express');
 var router = express.Router();
+var Base64 = require('js-base64').Base64;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,7 +26,7 @@ router.post('/music.yl', function(req, res, next) {
 
     console.log('RB: ' + req.rawBody);
     for (var i = req.connections.length - 1; i >= 0; i--) {
-        req.connections[i].send(req.rawBody);
+        req.connections[i].send(Base64.decode(req.rawBody));
     }
     
     return res.send({
