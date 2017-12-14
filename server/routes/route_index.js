@@ -20,6 +20,19 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.post('/music.yl', function(req, res, next) {
+    req.setEncoding('utf8');
+
+    console.log('RB: ' + req.rawBody);
+    for (var i = req.connections.length - 1; i >= 0; i--) {
+        req.connections[i].send(req.rawBody);
+    }
+    
+    return res.send({
+        status: 200
+    });
+});
+
 router.get('/debug', function(req, res, next) {
     var indexfile = path.join(__dirname + '../../../client/debug.html');
     console.log(indexfile);
