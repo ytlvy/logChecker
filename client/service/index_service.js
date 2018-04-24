@@ -49,6 +49,7 @@ index.factory('MyData', function($websocket, $sce) {
         var typepattern = /(.*?)(\W)(TYPE[^|]+)(.*?)/g;
         var timepattern = /(.*?)(\W)(IS_TIMELINE[^|]+)(.*?)/g;
         var psrcpattern = /(.*?)(\W)(PSRC[^|]+)(.*?)/g; 
+        var ptpattern = /(.*?)(\W)(PT[^|]+)(.*?)/g; 
 
         var ignorepatter = /\W(REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE)[^|]*\|/g;
 
@@ -58,6 +59,8 @@ index.factory('MyData', function($websocket, $sce) {
         aHtml = aHtml.replace(typepattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
         aHtml = aHtml.replace(timepattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
         aHtml = aHtml.replace(psrcpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
+        aHtml = aHtml.replace(ptpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
+
 
         aHtml = aHtml.replace(ignorepatter, "");
         aHtml = aHtml.replace("<PID", "PID");
