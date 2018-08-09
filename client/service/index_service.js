@@ -4,6 +4,7 @@ index.factory('MyData', function($websocket, $sce) {
     // Open a WebSocket connection
     var ws = $websocket('ws://localhost:8888/');
     var collection = [];
+    var debugLogs   = [];
     ws.onMessage(function(event) {
 
         // var res;
@@ -44,26 +45,16 @@ index.factory('MyData', function($websocket, $sce) {
 
     var paraseServerLog = function(message){
 
-        var actpattern = /(.*?)(\W)(ACT[^|]+)(.*?)/g;
-        var eventpattern = /(.*?)(\W)(EVENT[^|]+)(.*?)/g;
-        var typepattern = /(.*?)(\W)(TYPE[^|]+)(.*?)/g;
-        var timepattern = /(.*?)(\W)(IS_TIMELINE[^|]+)(.*?)/g;
-        var psrcpattern = /(.*?)(\W)(PSRC[^|]+)(.*?)/g; 
-        var ptpattern = /(.*?)(\W)(PT[^|]+)(.*?)/g; 
+        var aHtml = message;
 
-        var ignorepatter = /\W(REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE)[^|]*\|/g;
-
-        var aHtml = message.replace(actpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
-       
-        aHtml = aHtml.replace(eventpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
-        aHtml = aHtml.replace(typepattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
-        aHtml = aHtml.replace(timepattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
-        aHtml = aHtml.replace(psrcpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
-        aHtml = aHtml.replace(ptpattern, "$1$2 <b class=\"" + randomColor()  +"\">$3</b> $4");
-
-
-        aHtml = aHtml.replace(ignorepatter, "");
-        aHtml = aHtml.replace("<PID", "PID");
+        colums = ["ACT", "EVENT", "PSRC",  "PT",]; //"TYPE",
+        colums.forEach(function(element){
+            var pattern =  eval("/[<|]("+element+":[^|]+)/gi");
+            var match = pattern.exec(aHtml);
+            if(match) {
+                aHtml = aHtml.replace(match[1], "<b class=\"" + randomColor()  +"\">"+match[1]+"</b>" );
+            }
+        });
 
         collection.push({
             content: aHtml,

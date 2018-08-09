@@ -151,6 +151,11 @@ ol.linenums {
   margin-bottom: 0px;
   padding-left: 40px;
 }
+
+.demo-arow {
+    margin-top: 10px;
+}
+
 .demo-row .demo-heading-note,
 .demo-row .demo-text-note {
   display: block;
