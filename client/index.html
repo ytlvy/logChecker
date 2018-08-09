@@ -23,33 +23,38 @@
     </head>
 
     <body style="height:100%" class ="palette palette-clouds" ng-controller="indexController">
-        <h2 style="text-align: center;">酷我日志验收</h2>
+        <h3 style="text-align: center;margin-top: 15px;">酷我日志验收</h3>
 
 
         <section  class="palette palette-clouds ">
 
             <!--<h3 class="demo-panel-title">过滤</h3>-->
             <div class="row demo-row">
-                <div class="col-xs-3">
-                  <div class=" has-success">
+                <div class="col-xs-4 demo-col">
+                  <div class=" has-success col-xs-8 demo-col" style="padding-left: 0px;padding-right: 3px;">
                     <input type="text" value="" placeholder="VIDEO_LOG" class="form-control" ng-model="filterValue"  />
                     <span class="input-icon fui-check-inverted"></span>
                   </div>
-                </div>
-                <div class="col-xs-2">
-                  <a href="#fakelink" class="btn btn-block btn-lg btn-primary" ng-click="doFilter()">Filter</a>
-                </div>
-                <div class="col-xs-2">
-                  <a href="#fakelink" class="btn btn-block btn-lg btn-primary" ng-click="doClear()">Clear</a>
-                </div>
-                <div class="col-xs-3">
-                   <div class="tagsinput-primary">
-                    <input name="tagsinput" class="tagsinput" data-role="tagsinput" value="" ng-model="colorColums" />
+                  <div class="col-xs-4 demo-col" style="padding-left: 0px;padding-right: 0px">
+                      <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doFilter()">Filter</a>
                     </div>
                 </div>
                 
-                <div class="col-xs-2">
-                  <a href="#fakelink" class="btn btn-block btn-lg btn-primary" ng-click="showSimple()" >{{simpleBtnText}}</a>
+                <div class="col-xs-4 demo-col">
+                   <div class="tagsinput-primary col-xs-8" style="padding-left: 0px;padding-right: 3px;">
+                    <input name="tagsinput" class="tagsinput" data-role="tagsinput" value="" ng-model="colorColums" />
+                    </div>
+                    <div class="col-xs-4 demo-col" style="padding-left: 0px;padding-right: 0px">
+                      <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doColorize()" >Color</a>
+                    </div>
+                </div>
+                
+                
+                <div class="col-xs-2 demo-col">
+                  <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doClear()">Clear</a>
+                </div>
+                <div class="col-xs-2 demo-col">
+                  <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="showSimple()" >{{simpleBtnText}}</a>
                 </div>
             </div>
 
@@ -58,7 +63,7 @@
         <section class="palette palette-clouds"  scroll-glue style="overflow-x: hidden;">
             <ul ng-repeat="data in MyData.collection | filter: myfilter" >
               <li class="palette palette-wet-asphalt" ng-if="data.content=='--'" style="text-align:center"> ------------------------------------------------------------------ 分割线 ------------------------------------------------------------------</li>
-              <li class="palette palette-asbestos" ng-if="data.content!='--'" ng-bind-html="(data.content | colorize:this)" ng-model-options='{ debounce: 1000 }'> {{data.timeStamp}} </li>
+              <li class="palette palette-asbestos" ng-if="data.content!='--'" ng-bind-html="(data.content | htmlTrust )" ng-model-options='{ debounce: 1000 }'> {{data.timeStamp}} </li>
               
             </ul>
         </section>

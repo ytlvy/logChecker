@@ -385,3 +385,10 @@ ol.linenums {
 .demo-right {
   float: right;
 }
+.demo-col {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.demo-btn {
+  padding: 10px 10px;
+  }

@@ -7,14 +7,20 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
     $scope.simpleBtnText = "DETAIL";
 
     var isFileter = false;
-    $scope.isSimple = true;
+    $scope.isSimple = false;
+
+    $scope.doColorize = function() {
+        var cols = $scope.colorColums.split(",");
+        $scope.MyData.extendColumn(cols);
+    }
 
     $scope.showSimple = function() {
         $scope.isSimple = !$scope.isSimple;
+        $scope.MyData.showDetail($scope.isSimple);
         if($scope.isSimple)
-            $scope.simpleBtnText = "DETAIL";
-        else 
             $scope.simpleBtnText = "SIMPLE";
+        else 
+            $scope.simpleBtnText = "DETAIL";
     }
 
     $scope.myfilter = function (msg) {
@@ -52,22 +58,6 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
 .filter('colorize', ['$sce', function($sce){ //colorize:this
     return function(item, scope){
         if(item.length < 1) return;
-
-        if(scope.isSimple) {
-            var ignorepatter = /[<|](REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE):[^|]+/gi;
-            item = item.replace(ignorepatter, "");
-        }
-
-        if(scope.colorColums.length > 0) {
-            colums = scope.colorColums.split(",");
-            colums.forEach(function(element){
-                var pattern =  eval("/[<|]("+element+":[^|]+)/gi");
-                var match = pattern.exec(item);
-                if(match) {
-                    item = item.replace(match[1], "<b class=\"" + scope.randomColor()  +"\">"+match[1]+"</b>" );
-                }
-            });
-        }
 
         return $sce.trustAsHtml(item);
     }

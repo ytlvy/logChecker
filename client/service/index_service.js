@@ -2,9 +2,13 @@ var index = angular.module('services.index', ['ngSanitize']);
 
 index.factory('MyData', function($websocket, $sce) {
     // Open a WebSocket connection
-    var ws = $websocket('ws://localhost:8888/');
+    
     var collection = [];
     var debugLogs   = [];
+    var showDetail_ = false;
+    var extColorColums_ = [];
+
+    var ws = $websocket('ws://localhost:8888/');
     ws.onMessage(function(event) {
 
         // var res;
@@ -39,7 +43,7 @@ index.factory('MyData', function($websocket, $sce) {
     };
 
     var randomColor = function() {
-        let colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot'];
+        let colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot','palette-wet-asphalt','palette-midnight-blue','palette-sun-flower','palette-ALIZARIN'];
         return colors[Math.floor(Math.random()*colors.length)];
     }
 
@@ -55,6 +59,26 @@ index.factory('MyData', function($websocket, $sce) {
                 aHtml = aHtml.replace(match[1], "<b class=\"" + randomColor()  +"\">"+match[1]+"</b>" );
             }
         });
+
+
+        if(!showDetail_) {
+            var ignorepatter = /[<|](REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE):[^|]+/gi;
+            aHtml = aHtml.replace(ignorepatter, "");
+        }
+        else {
+            console.log("显示详情");
+        }
+
+        if(extColorColums_.length > 0) {
+            console.log("进入扩展过滤");
+            extColorColums_.forEach(function(element){
+                var pattern =  eval("/[<|]("+element+":[^|]+)/gi");
+                var match = pattern.exec(aHtml);
+                if(match) {
+                    aHtml = aHtml.replace(match[1], "<b class=\"" + randomColor()  +"\">"+match[1]+"</b>" );
+                }
+            });
+        }
 
         collection.push({
             content: aHtml,
@@ -92,20 +116,29 @@ index.factory('MyData', function($websocket, $sce) {
         }
     
     }, 1000);
-    return {
+
+    var factory = {
         collection: collection,
-        status: function() {
-            return ws.readyState;
-        },
-        send: function(message) {
-            if (angular.isString(message)) {
-                ws.send(message);
-            } else if (angular.isObject(message)) {
-                ws.send(JSON.stringify(message));
-            }
-        },
-        clear: function () {
-            collection.length = 0;
+    };
+    factory.extendColumn = function(columns) {
+        extColorColums_ = columns;
+    };
+    factory.showDetail = function(showDe) {
+        showDetail_ = showDe;
+    };
+    factory.status = function() {
+        return ws.readyState;
+    };
+    factory.send = function(message) {
+        if (angular.isString(message)) {
+            ws.send(message);
+        } else if (angular.isObject(message)) {
+            ws.send(JSON.stringify(message));
         }
     };
+    factory.clear = function () {
+        collection.length = 0;
+    };
+
+    return factory;
 })
