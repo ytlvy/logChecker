@@ -15,6 +15,7 @@
         <script src="./asset/js/angular-websocket.js"></script>
         <script src="./asset/js/scrollglue.js"></script>
         <script src="./asset/js/index.js"></script>
+        <script src="./asset/js/application.js"></script>
         <script data-require="angular-sanitize.js@1.2.0-rc.3" data-semver="1.2.0-rc.3" src="https://code.angularjs.org/1.2.0-rc.3/angular-sanitize.js"></script>
 
         <link href="./asset/css/index.css" rel="stylesheet">
@@ -30,7 +31,7 @@
 
             <!--<h3 class="demo-panel-title">过滤</h3>-->
             <div class="row demo-row">
-                <div class="col-xs-4 demo-col">
+                <div class="col-xs-3 demo-col">
                   <div class=" has-success col-xs-8 demo-col" style="padding-left: 0px;padding-right: 3px;">
                     <input type="text" value="" placeholder="VIDEO_LOG" class="form-control" ng-model="filterValue"  />
                     <span class="input-icon fui-check-inverted"></span>
@@ -40,7 +41,7 @@
                     </div>
                 </div>
                 
-                <div class="col-xs-4 demo-col">
+                <div class="col-xs-3 demo-col">
                    <div class="tagsinput-primary col-xs-8" style="padding-left: 0px;padding-right: 3px;">
                     <input name="tagsinput" class="tagsinput" data-role="tagsinput" value="" ng-model="colorColums" />
                     </div>
@@ -50,18 +51,24 @@
                 </div>
                 
                 
-                <div class="col-xs-2 demo-col">
+                <div class="col-xs-1 demo-col">
                   <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doClear()">Clear</a>
                 </div>
-                <div class="col-xs-2 demo-col">
+                <div class="col-xs-1 demo-col">
                   <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="showSimple()" >{{simpleBtnText}}</a>
+                </div>
+
+                <div class="col-xs-4 demo-col">
+                    <select class="form-control select select-primary" data-toggle="select" ng-init="selectedName = MyData.clients[0]" ng-model="clientIp" ng-options="x for x in MyData.clients">
+
+                    </select>
                 </div>
             </div>
 
         </section>
 
         <section class="palette palette-clouds"  scroll-glue style="overflow-x: hidden;">
-            <ul ng-repeat="data in MyData.collection | filter: myfilter" >
+            <ul ng-repeat="data in MyData.collection | filter:clientFilter |filter: myfilter" >
               <li class="palette palette-wet-asphalt" ng-if="data.content=='--'" style="text-align:center"> ------------------------------------------------------------------ 分割线 ------------------------------------------------------------------</li>
               <li class="palette palette-asbestos" ng-if="data.content!='--'" ng-bind-html="(data.content | htmlTrust )" ng-model-options='{ debounce: 1000 }'> {{data.timeStamp}} </li>
               

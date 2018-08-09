@@ -7,6 +7,7 @@ index.factory('MyData', function($websocket, $sce) {
     var debugLogs   = [];
     var showDetail_ = false;
     var extColorColums_ = [];
+    var clients = ["clientIP"];
 
     var ws = $websocket('ws://localhost:8888/');
     ws.onMessage(function(event) {
@@ -29,8 +30,16 @@ index.factory('MyData', function($websocket, $sce) {
         else {
             paraseServerLog(message);
         }
+        paraseClients(message);
     });
 
+    var paraseClients = function(message) {
+        var matches = message.split(" =-= ");
+        if(matches.length>1 && clients.indexOf(matches[0])==-1) {
+            clients.push(matches[0]);
+        }
+
+    }
     var paraseDebugLog = function(message){
         
         var found = message.match(/^==(\w*)==/);
@@ -119,6 +128,7 @@ index.factory('MyData', function($websocket, $sce) {
 
     var factory = {
         collection: collection,
+        clients:clients,
     };
     factory.extendColumn = function(columns) {
         extColorColums_ = columns;

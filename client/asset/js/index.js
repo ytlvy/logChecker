@@ -5,6 +5,7 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
     $scope.colorColums = "";
     $scope.filterValue = "ACT:VIDEO_LOG";
     $scope.simpleBtnText = "DETAIL";
+    $scope.clientIp= "clientIP";
 
     var isFileter = false;
     $scope.isSimple = false;
@@ -21,6 +22,15 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
             $scope.simpleBtnText = "SIMPLE";
         else 
             $scope.simpleBtnText = "DETAIL";
+    }
+
+    $scope.clientFilter = function(msg) {
+        if($scope.clientIp.length>0 && $scope.clientIp!="clientIP") {
+              return msg.content.substring(0, $scope.clientIp.length) === $scope.clientIp;
+        }
+        else {
+            return true;
+        }
     }
 
     $scope.myfilter = function (msg) {
