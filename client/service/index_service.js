@@ -1,5 +1,9 @@
 var index = angular.module('services.index', ['ngSanitize']);
-
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (prefix){
+    return this.slice(0, prefix.length) === prefix;
+  };
+}
 index.factory('MyData', function($websocket, $sce) {
     // Open a WebSocket connection
     
@@ -8,6 +12,7 @@ index.factory('MyData', function($websocket, $sce) {
     var showDetail_ = false;
     var extColorColums_ = [];
     var clients = ["clientIP"];
+    var spClient_;
 
     var ws = $websocket('ws://localhost:8888/');
     ws.onMessage(function(event) {
@@ -59,6 +64,10 @@ index.factory('MyData', function($websocket, $sce) {
     var paraseServerLog = function(message){
 
         var aHtml = message;
+
+        if(spClient_.length>0 && !message.startsWith(spClient_)) {
+            return;
+        }
 
         colums = ["ACT", "EVENT", "PSRC",  "PT",]; //"TYPE",
         colums.forEach(function(element){
@@ -132,6 +141,9 @@ index.factory('MyData', function($websocket, $sce) {
     };
     factory.extendColumn = function(columns) {
         extColorColums_ = columns;
+    };
+    factory.doClientFilter = function(cli) {
+        spClient_ = cli;
     };
     factory.showDetail = function(showDe) {
         showDetail_ = showDe;

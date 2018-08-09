@@ -15,6 +15,18 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
         $scope.MyData.extendColumn(cols);
     }
 
+    $scope.$watch('clientIp', function(newVal, oldVal){
+        console.log("clientIp was changed to:"+newVal);
+        $scope.clientIp = newVal;
+
+        if(newVal=="clientIP") {
+            $scope.MyData.doClientFilter("");
+        }
+        else {
+            $scope.MyData.doClientFilter(newVal);
+        }
+      });
+
     $scope.showSimple = function() {
         $scope.isSimple = !$scope.isSimple;
         $scope.MyData.showDetail($scope.isSimple);
