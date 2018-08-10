@@ -390,5 +390,8 @@ ol.linenums {
   padding-left: 8px;
 }
 .demo-btn {
-  padding: 10px 10px;
+  padding: 10px 5px;
   }
+.select2-drop {
+  min-width: 160px;
+}

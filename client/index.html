@@ -17,13 +17,13 @@
         <script src="./asset/js/index.js"></script>
         <script src="./asset/js/application.js"></script>
         <script data-require="angular-sanitize.js@1.2.0-rc.3" data-semver="1.2.0-rc.3" src="https://code.angularjs.org/1.2.0-rc.3/angular-sanitize.js"></script>
-
+        <script src="./asset/js/jquery.toaster.js"></script>
         <link href="./asset/css/index.css" rel="stylesheet">
 
         <script src="./service/index_service.js"></script>
     </head>
 
-    <body style="height:100%" class ="palette palette-clouds" ng-controller="indexController">
+    <body style="height:100%" class =" palette-clouds" ng-controller="indexController">
         <h3 style="text-align: center;margin-top: 15px;">酷我日志验收</h3>
 
 
@@ -41,27 +41,31 @@
                     </div>
                 </div>
                 
-                <div class="col-xs-3 demo-col">
+                <div class="col-xs-4 demo-col">
                    <div class="tagsinput-primary col-xs-8" style="padding-left: 0px;padding-right: 3px;">
                     <input name="tagsinput" class="tagsinput" data-role="tagsinput" value="" ng-model="colorColums" />
                     </div>
                     <div class="col-xs-4 demo-col" style="padding-left: 0px;padding-right: 0px">
-                      <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doColorize()" >Color</a>
+                      <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doColorize()" >Colorize</a>
                     </div>
                 </div>
                 
-                
-                <div class="col-xs-1 demo-col">
-                  <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doClear()">Clear</a>
-                </div>
-                <div class="col-xs-1 demo-col">
-                  <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="showSimple()" >{{simpleBtnText}}</a>
+                <div class="col-xs-2 demo-col">
+                    <div class="col-xs-6 demo-col" style="padding-left: 0px;padding-right: 3px;">
+                      <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doClear()">Clear</a>
+                    </div>
+                    <div class="col-xs-6 demo-col" style="padding-left: 0px;padding-right: 0px">
+                      <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="showSimple()" >{{simpleBtnText}}</a>
+                    </div>
                 </div>
 
-                <div class="col-xs-4 demo-col">
-                    <select class="form-control select select-primary" data-toggle="select" ng-init="selectedName = MyData.clients[0]" ng-model="clientIp" ng-options="x for x in MyData.clients">
-
-                    </select>
+                <div class="col-xs-3 demo-col">
+                        <select class="form-control select select-primary" data-toggle="select" ng-init="selectedName = MyData.clients[0]" data-ng-model="clientIp" ng-options="x for x in MyData.clients" style="min-width: 160px;">
+                            <option value="">{{clientIp}}</option>
+                        </select>
+                   
+                        <kbd>{{clientsTxt}}</kbd>
+                   
                 </div>
             </div>
 

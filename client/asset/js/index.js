@@ -1,14 +1,19 @@
+var index = angular.module('services.index', ['ngSanitize']);
+
 angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives', 'ngSanitize'])
 .controller('indexController', function($scope, MyData) {
     $scope.MyData = MyData;
     $scope.glued = true;
     $scope.colorColums = "";
     $scope.filterValue = "ACT:VIDEO_LOG";
-    $scope.simpleBtnText = "DETAIL";
+    $scope.simpleBtnText = "Detail";
     $scope.clientIp= "clientIP";
+    $scope.clientsTxt = "(" + MyData.clients.length +")";
 
     var isFileter = false;
     $scope.isSimple = false;
+
+    //$.toaster({ priority : 'success', title : 'Notice', message : 'Your message here'});
 
     $scope.doColorize = function() {
         var cols = $scope.colorColums.split(",");
@@ -19,7 +24,7 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
         console.log("clientIp was changed to:"+newVal);
         $scope.clientIp = newVal;
 
-        if(newVal=="clientIP") {
+        if(!newVal || newVal.toString().substring(0, "clientIP".length) === "clientIP") { 
             $scope.MyData.doClientFilter("");
         }
         else {
@@ -27,17 +32,32 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
         }
       });
 
+    $scope.$watch('MyData.clients.length', function(newVal, oldVal){
+        if(parseInt(newVal) > parseInt(oldVal))
+            $.toaster({ priority : 'danger', title : 'Notice', message : 'new client ' + $scope.MyData.clients[$scope.MyData.clients.length - 1] + ' connect'});
+        else {
+            $.toaster({ priority : 'info', title : 'Notice', message : 'a client leave'});
+        }
+
+        if(newVal != oldVal && $scope.clientIp.substring(0, "clientIP".length) == "clientIP") {
+            $scope.clientsTxt = ("(" + newVal + ")");
+            // $scope.clientIp= "clientIP" + ("(" + newVal + ")");
+        }
+
+      });
+
     $scope.showSimple = function() {
+
         $scope.isSimple = !$scope.isSimple;
         $scope.MyData.showDetail($scope.isSimple);
         if($scope.isSimple)
-            $scope.simpleBtnText = "SIMPLE";
+            $scope.simpleBtnText = "Simple";
         else 
-            $scope.simpleBtnText = "DETAIL";
+            $scope.simpleBtnText = "Detail";
     }
 
     $scope.clientFilter = function(msg) {
-        if($scope.clientIp.length>0 && $scope.clientIp!="clientIP") {
+        if($scope.clientIp.length>0 && $scope.clientIp.substring(0, "clientIP".length) != "clientIP") {
               return msg.content.substring(0, $scope.clientIp.length) === $scope.clientIp;
         }
         else {

@@ -11,7 +11,7 @@ index.factory('MyData', function($websocket, $sce) {
     var debugLogs   = [];
     var showDetail_ = false;
     var extColorColums_ = [];
-    var clients = ["clientIP"];
+    var clients = [];
     var spClient_;
 
     var ws = $websocket('ws://localhost:8888/');

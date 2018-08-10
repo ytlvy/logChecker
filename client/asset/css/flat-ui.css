@@ -5737,7 +5737,7 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   color: #ffffff;
   margin: 0;
   padding: 15px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 .palette dt,
 .palette dd {
