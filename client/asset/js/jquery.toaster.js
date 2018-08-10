@@ -90,9 +90,9 @@
 			'css'       :
 			{
 				'position' : 'fixed',
-				'top'      : '10px',
-				'right'    : '10px',
-				'width'    : '300px',
+				'top'      : '300px',
+				'right'    : '100px',
+				'width'    : '600px',
 				'zIndex'   : 50000
 			}
 		},
@@ -118,7 +118,7 @@
 			'cssm'     : {},
 			'csst'     : { 'fontWeight' : 'bold' },
 
-			'fade'     : 'slow',
+			'fade'     : "slow",
 
 			'display'    : function ($toast)
 			{
