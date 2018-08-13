@@ -9,7 +9,7 @@ var path = require('path');
 // var bodyParser = require('body-parser');
 var router = express.Router();
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8888 });
+const wss = new WebSocket.Server({ port: 9999 });
 
 process.title = "kwlog";
 

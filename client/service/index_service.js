@@ -14,7 +14,7 @@ index.factory('MyData', function($websocket, $sce) {
     var clients = [];
     var spClient_;
 
-    var ws = $websocket('ws://localhost:8888/');
+    var ws = $websocket('ws://localhost:9999/');
     ws.onMessage(function(event) {
 
         // var res;
