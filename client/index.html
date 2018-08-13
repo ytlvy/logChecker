@@ -24,7 +24,7 @@
     </head>
 
     <body style="height:100%" class =" palette-clouds" ng-controller="indexController">
-        <h3 style="text-align: center;margin-top: 15px;">酷我日志验收<img src="./asset/img/brcode.png" class="rounded float-right"  style="width: 43px; margin-left: 20px;"></h3>
+        <h3 style="text-align: center;margin-top: 15px;">酷我日志验收 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 20px">二维码 </button></h3>
         <section  class="palette palette-clouds ">
 
             <!--<h3 class="demo-panel-title">过滤</h3>-->
@@ -76,5 +76,19 @@
               
             </ul>
         </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document" style="width: 450px">
+            <div class="modal-content">
+              <div class="modal-body" style="text-align: center;">
+                <img src="./asset/img/brcode.png" class="rounded float-right"  style="width: 400px;">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </body>
 </html>
