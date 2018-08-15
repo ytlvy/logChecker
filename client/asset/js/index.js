@@ -21,10 +21,9 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
     }
 
     $scope.$watch('clientIp', function(newVal, oldVal){
-        console.log("clientIp was changed to:"+newVal);
         $scope.clientIp = newVal;
 
-        if(!newVal || newVal.toString().substring(0, "clientIP".length) === "clientIP") { 
+        if(!newVal ||newVal.length<1 || newVal.toString().startsWith("clientIP")) { 
             $scope.MyData.doClientFilter("");
         }
         else {
@@ -39,9 +38,8 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
             $.toaster({ priority : 'info', title : 'Notice', message : 'a client leave'});
         }
 
-        if(newVal != oldVal && $scope.clientIp.substring(0, "clientIP".length) == "clientIP") {
+        if(newVal != oldVal && $scope.clientIp.toString().startsWith("clientIP")) {
             $scope.clientsTxt = ("(" + newVal + ")");
-            // $scope.clientIp= "clientIP" + ("(" + newVal + ")");
         }
 
       });
@@ -57,8 +55,19 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
     }
 
     $scope.clientFilter = function(msg) {
-        if($scope.clientIp.length>0 && $scope.clientIp.substring(0, "clientIP".length) != "clientIP") {
-              return msg.content.substring(0, $scope.clientIp.length) === $scope.clientIp;
+        if($scope.clientIp.length>0) {
+
+            var clients = $scope.clientIp.split(",");
+            var bShow = ture;
+            clients.every(function(element, index){
+                if(msg.toString().startsWith(element)) {
+                    bShow = false;
+                    return false;
+                }
+                return true;
+            })
+
+            return bShow;
         }
         else {
             return true;

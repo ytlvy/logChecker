@@ -15,6 +15,8 @@
         <script src="./asset/js/angular-websocket.js"></script>
         <script src="./asset/js/scrollglue.js"></script>
         <script src="./asset/js/index.js"></script>
+        <script src="./asset/js/qrcode.js"></script>
+
         <script src="./asset/js/application.js"></script>
         <script data-require="angular-sanitize.js@1.2.0-rc.3" data-semver="1.2.0-rc.3" src="https://code.angularjs.org/1.2.0-rc.3/angular-sanitize.js"></script>
         <script src="./asset/js/jquery.toaster.js"></script>
@@ -58,8 +60,8 @@
                 </div>
 
                 <div class="col-xs-3 demo-col">
-                        <select class="form-control select select-primary" data-toggle="select" ng-init="selectedName = MyData.clients[0]" data-ng-model="clientIp" ng-options="x for x in MyData.clients" style="min-width: 160px;">
-                            <option value="">{{clientIp}}</option>
+                        <select class="form-control select-primary multiselect multiselect-info" data-toggle="select" ng-init="selectedName = clientIp" data-ng-model="clientIp" ng-options="x for x in MyData.clients" style="min-width: 160px;"  multiple="multiple" >
+                            <option value="" disabled>clientFilter</option>
                         </select>
                    
                         <kbd>{{clientsTxt}}</kbd>
@@ -81,8 +83,8 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document" style="width: 450px">
             <div class="modal-content">
-              <div class="modal-body" style="text-align: center;">
-                <img src="./asset/img/brcode.png" class="rounded float-right"  style="width: 400px;">
+              <div class="modal-body" id="qrcode" style="text-align: center;">
+                <!--<img src="./asset/img/brcode.png" class="rounded float-right"  style="width: 400px;">-->
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -90,5 +92,15 @@
             </div>
           </div>
         </div>
+        <script type="text/javascript">
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+          text: location.host,
+          width: 400,
+          height: 400,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+        </script>
     </body>
 </html>

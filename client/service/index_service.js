@@ -14,7 +14,7 @@ index.factory('MyData', function($websocket, $sce) {
     var clients = [];
     var spClient_;
 
-    var ws = $websocket('ws://localhost:9999/');
+    var ws = $websocket("ws://"+location.hostname+":9999/");
     ws.onMessage(function(event) {
 
         // var res;
@@ -66,7 +66,18 @@ index.factory('MyData', function($websocket, $sce) {
         var aHtml = message;
 
         if(spClient_.length>0 && !message.startsWith(spClient_)) {
-            return;
+
+
+            var clients = spClient_.toString().split(",");
+            var bShow = false;
+            clients.every(function(element, index){
+                if(message.toString().startsWith(element)) {
+                    bShow = true;
+                    return false;
+                }
+                return true;
+            })
+            if(!bShow) return;
         }
 
         colums = ["ACT", "EVENT", "PSRC",  "PT",]; //"TYPE",

@@ -35,4 +35,15 @@ or
 ```
 
 
+### autoLogin
+
+```
+npm install -g forever
+```
+
+
+```
+crontab -u yanjie.guo -e
+@reboot @reboot /home/yanjie.guo/apps/bin/forever start -o out.log -e err.log /home/yanjie.guo/logChecker/app.js
+```
 
