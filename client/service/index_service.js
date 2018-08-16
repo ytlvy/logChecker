@@ -85,7 +85,7 @@ index.factory('MyData', function($websocket, $sce) {
             var pattern =  eval("/[<|]("+element+":[^|]+)/gi");
             var match = pattern.exec(aHtml);
             if(match) {
-                aHtml = aHtml.replace(match[1], "<b class=\"" + randomColor()  +"\">"+match[1]+"</b>" );
+                aHtml = aHtml.replace(match[1], "<b class=\"" + randomColor()  +" demo_highlight\">"+match[1]+"</b>" );
             }
         });
 
@@ -110,7 +110,7 @@ index.factory('MyData', function($websocket, $sce) {
         }
 
         collection.push({
-            content: aHtml,
+            content: '<div class="demo-line">' +aHtml+"</div>",
             timeStamp: event.timeStamp
         });
     };

@@ -395,3 +395,13 @@ ol.linenums {
 .select2-drop {
   min-width: 160px;
 }
+.demo_highlight {
+  font-size: 16px;
+  font-weight: 300;
+  color: #fff;
+  font-style:normal;
+}
+.demo-line {
+  font-style:italic;
+  color: #ccc
+  }
