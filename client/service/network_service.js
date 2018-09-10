@@ -7,8 +7,8 @@ debug.factory('MyData', function($websocket, $sce) {
 
         var message = event.data;
         // console.log("RB:" + message);
-        var debugPattern =  /^==(\w*)==.*/;
-        if(debugPattern.test(message)) {
+        var networkPattern =  /^==HTTP==.*/;
+        if(networkPattern.test(message)) {
             paraseDebugLog(message);
         }
     });
