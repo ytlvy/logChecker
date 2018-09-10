@@ -13,30 +13,25 @@ debug.factory('MyData', function($websocket, $sce) {
         }
     });
 
+    var randomColor = function() {
+        let colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot','palette-wet-asphalt','palette-midnight-blue','palette-sun-flower','palette-ALIZARIN'];
+        return colors[Math.floor(Math.random()*colors.length)];
+    }
+
     var paraseDebugLog = function(message){
         
-        let errorLevel = ["HTTP"];
-
-        var found = message.match(/^==(\w*)==/);
-        // console.log(found);
-
-        var levelStr = "";
-        var levelNum = 10;
-        if(found && found.length>0) {
-            levelStr = found[1];
-            var idx = errorLevel.indexOf(levelStr);
-            if(idx > -1) {
-                levelNum = idx;
-            }
+        var pattern =  /[<|]URL:([^|]+)/gi
+        var match = pattern.exec(message);
+        if(match) {
+            message = message.replace(match[1], "<a class=\"" + randomColor()  +" demo_highlight\" target=\"_blank\" href=\""+match[1]+"\">"+match[1]+"</a>" );
         }
+
 
         var newDate = new Date();
         var dateString = newDate.toLocaleTimeString();
         
         debugLogs.push({
-            content: message,
-            level:levelStr,
-            levelN:levelNum,
+            content: '<div class="demo-line">' +message+"</div>",
             timeStamp: dateString
         });
     };

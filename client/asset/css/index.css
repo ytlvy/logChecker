@@ -405,3 +405,7 @@ ol.linenums {
   font-style:italic;
   color: #ccc
   }
+
+a.demo_highlight {
+word-wrap: break-word;
+}
