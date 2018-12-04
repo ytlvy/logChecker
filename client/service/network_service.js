@@ -3,15 +3,28 @@ var debug = angular.module('services.network', ['ngSanitize']);
 debug.factory('MyData', function($websocket, $sce) {
     var ws = $websocket("ws://"+location.hostname+":9999/");
     var debugLogs   = [];
+    var clients = [];
+    var spClient_;
+
     ws.onMessage(function(event) {
 
         var message = event.data;
         // console.log("RB:" + message);
-        var networkPattern =  /^==HTTP==.*/;
+        var networkPattern =  /.*==HTTP==.*/;
         if(networkPattern.test(message)) {
             paraseDebugLog(message);
         }
+
+        paraseClients(message);
     });
+
+    var paraseClients = function(message) {
+        var matches = message.split(" =-= ");
+        if(matches.length>1 && clients.indexOf(matches[0])==-1) {
+            clients.push(matches[0]);
+        }
+
+    }
 
     var randomColor = function() {
         let colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot','palette-wet-asphalt','palette-midnight-blue','palette-sun-flower','palette-ALIZARIN'];
@@ -20,6 +33,21 @@ debug.factory('MyData', function($websocket, $sce) {
 
     var paraseDebugLog = function(message){
         
+        if(spClient_.length>0 && !message.startsWith(spClient_)) {
+
+
+            var clients = spClient_.toString().split(",");
+            var bShow = false;
+            clients.every(function(element, index){
+                if(message.toString().startsWith(element)) {
+                    bShow = true;
+                    return false;
+                }
+                return true;
+            })
+            if(!bShow) return;
+        }
+
         var pattern =  /[<|]URL:([^|]+)/gi
         var match = pattern.exec(message);
         if(match) {
@@ -62,6 +90,7 @@ debug.factory('MyData', function($websocket, $sce) {
     }, 1000);
     return {
         debugLogs: debugLogs,
+        clients:clients,
         status: function() {
             return ws.readyState;
         },
@@ -71,6 +100,9 @@ debug.factory('MyData', function($websocket, $sce) {
             } else if (angular.isObject(message)) {
                 ws.send(JSON.stringify(message));
             }
+        },
+        doClientFilter : function(cli) {
+        spClient_ = cli;
         },
         clear: function () {
             debugLogs.length = 0;

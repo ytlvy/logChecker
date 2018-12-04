@@ -64,8 +64,13 @@ router.get('/network', function(req, res, next) {
     req.setEncoding('utf8');
 
     console.log('RB: ' + req.rawBody);
+    var clientIp = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
+    if (clientIp.substr(0, 7) == "::ffff:") {
+        clientIp = clientIp.substr(7);
+    }
+    console.log('client11: ' + clientIp);
     for (var i = req.connections.length - 1; i >= 0; i--) {
-        req.connections[i].send(req.rawBody);
+        req.connections[i].send(clientIp + " =-= " + req.rawBody);
     }
     
     return res.send({

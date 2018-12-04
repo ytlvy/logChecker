@@ -6,12 +6,59 @@ angular.module('LogChecker', ['ngWebSocket', 'services.network', 'luegg.directiv
     $scope.filterValue = "==HTTP==";
     $scope.curLevel = 4;
     var isFileter = false;
+    $scope.clientIp= "clientIP";
+    $scope.clientsTxt = "(" + MyData.clients.length +")";
+
+    $scope.$watch('clientIp', function(newVal, oldVal){
+        $scope.clientIp = newVal;
+
+        if(!newVal ||newVal.length<1 || newVal.toString().startsWith("clientIP")) { 
+            $scope.MyData.doClientFilter("");
+        }
+        else {
+            $scope.MyData.doClientFilter(newVal);
+        }
+      });
+
+    $scope.$watch('MyData.clients.length', function(newVal, oldVal){
+        if(parseInt(newVal) > parseInt(oldVal))
+            $.toaster({ priority : 'danger', title : 'Notice', message : 'new client ' + $scope.MyData.clients[$scope.MyData.clients.length - 1] + ' connect'});
+        else {
+            $.toaster({ priority : 'info', title : 'Notice', message : 'a client leave'});
+        }
+
+        if(newVal != oldVal && $scope.clientIp.toString().startsWith("clientIP")) {
+            $scope.clientsTxt = ("(" + newVal + ")");
+        }
+
+      });
+
+    $scope.clientFilter = function(msg) {
+        if($scope.clientIp.length>0) {
+
+            var clients = $scope.clientIp.split(",");
+            var bShow = ture;
+            clients.every(function(element, index){
+                if(msg.toString().startsWith(element)) {
+                    bShow = false;
+                    return false;
+                }
+                return true;
+            })
+
+            return bShow;
+        }
+        else {
+            return true;
+        }
+    }
 
     $scope.myfilter = function (msg) {
-        console.log("begin filter" + msg);
         if(!isFileter) {
             return true;
         }
+        console.log("begin filter" + msg);
+
 
         console.log("begin filter" + msg);
 

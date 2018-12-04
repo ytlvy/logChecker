@@ -34,7 +34,14 @@
                   <a href="#fakelink" class="btn btn-block btn-lg btn-primary" ng-click="doClear()">Clear</a>
                 </div>
 
-                
+                <div class="col-xs-3 demo-col">
+                        <select class="form-control select-primary multiselect multiselect-info" data-toggle="select" ng-init="selectedName = clientIp" data-ng-model="clientIp" ng-options="x for x in MyData.clients" style="min-width: 160px;"  multiple="multiple" >
+                            <option value="" disabled>clientFilter</option>
+                        </select>
+                   
+                        <kbd>{{clientsTxt}}</kbd>
+                   
+                </div>
             </div>
         </section>
 
@@ -55,8 +62,10 @@
         <script src="./asset/js/angular-websocket.js"></script>
         <script src="./asset/js/scrollglue.js"></script>
         <script src="./service/network_service.js"></script>
-        <script src="./asset/js/network.js"></script>
         <script data-require="angular-sanitize.js@1.2.0-rc.3" data-semver="1.2.0-rc.3" src="https://code.angularjs.org/1.2.0-rc.3/angular-sanitize.js"></script>
+        <script src="./asset/js/jquery.toaster.js"></script>
+         <script src="./asset/js/network.js"></script>
+
         <script src="./asset/js/application.js"></script>
     </body>
 </html>
