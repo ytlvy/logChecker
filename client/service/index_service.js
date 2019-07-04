@@ -29,8 +29,13 @@ index.factory('MyData', function($websocket, $sce) {
         var message = event.data;
 
         var debugPattern =  /^==(\w*)==.*/;
+        var networkPattern =  /.*==HTTP==.*/;
+        
         if(debugPattern.test(message)) {
             paraseDebugLog(message);
+        }
+        else if(networkPattern.test(message)) {
+            
         }
         else {
             paraseServerLog(message);
