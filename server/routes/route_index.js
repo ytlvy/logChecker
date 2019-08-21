@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
         req.connections[i].send(clientIp + " =-= " +req.rawBody);
     }
     
-    return res.send({
+    return res.status(200).send({
         status: 200
     });
 });
@@ -34,7 +34,7 @@ router.post('/music.yl', function(req, res, next) {
         req.connections[i].send(Base64.decode(req.rawBody));
     }
     
-    return res.send({
+    return res.status(200).send({
         status: 200
     });
 });
@@ -51,7 +51,7 @@ router.get('/debug', function(req, res, next) {
         req.connections[i].send(req.rawBody);
     }
     
-    return res.send({
+    return res.status(200).send({
         status: 200
     });
 });
@@ -73,7 +73,7 @@ router.get('/network', function(req, res, next) {
         req.connections[i].send(clientIp + " =-= " + req.rawBody);
     }
     
-    return res.send({
+    return res.status(200).send({
         status: 200
     });
 });
