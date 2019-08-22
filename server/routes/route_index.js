@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     req.setEncoding('utf8');
 
     console.log('RB: ' + req.rawBody);
-    var clientIp = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
+    var clientIp = (req.headers['x-forwarded-for'] || req.headers['x-forwarded-for1'] || req.connection.remoteAddress || '').split(',')[0].trim();
     if (clientIp.substr(0, 7) == "::ffff:") {
         clientIp = clientIp.substr(7);
     }

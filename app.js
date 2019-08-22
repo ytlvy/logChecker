@@ -9,7 +9,7 @@ var path = require('path');
 // var bodyParser = require('body-parser');
 var router = express.Router();
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 9999 });
+const wss = new WebSocket.Server({ port: 19908 });
 
 process.title = "kwlog";
 
@@ -64,7 +64,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
+  res.status(err.status || 200);
   res.render('error');
 });
 
@@ -89,8 +89,8 @@ if (module.parent) {
   module.exports = app;
 } else {
   // 监听端口，启动程序
-  app.listen(8090, function listening() {
-      console.log('Listening on 8090');
+  app.listen(19909, function listening() {
+      console.log('Listening on 19909');
   });
 }
 
