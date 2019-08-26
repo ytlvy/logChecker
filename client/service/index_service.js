@@ -66,6 +66,10 @@ index.factory('MyData', function($websocket, $sce) {
         return colors[Math.floor(Math.random()*colors.length)];
     }
 
+   var safehtml = function(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
     var paraseServerLog = function(message){
 
         var aHtml = message;
@@ -90,7 +94,7 @@ index.factory('MyData', function($websocket, $sce) {
             var pattern =  eval("/[<|]("+element+":[^|]+)/gi");
             var match = pattern.exec(aHtml);
             if(match) {
-                aHtml = aHtml.replace(match[1], "<b class=\"" + randomColor()  +" demo_highlight\">"+match[1]+"</b>" );
+                aHtml = aHtml.replace(match[1], "<b class=\"" + randomColor()  +" demo_highlight\">"+safehtml(match[1])+"</b>" );
             }
         });
 
