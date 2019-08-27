@@ -15,9 +15,9 @@
   "devDependencies": {},
   "main": "app.js",
   "scripts": {
-    "start": "forever start -o out.log -e err.log app.js",
+    "start": "nohup node app.js 2>&1 > output &",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "stop": "forever stopall&& rm err.log out.log"
+    "stop": "pkill -f kwlog"
   },
   "author": "gyj",
   "license": "ISC"
