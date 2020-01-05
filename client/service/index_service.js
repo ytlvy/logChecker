@@ -89,7 +89,7 @@ index.factory('MyData', function($websocket, $sce) {
             if(!bShow) return;
         }
 
-        colums = ["ACT", "EVENT", "PSRC",  "PT",]; //"TYPE",
+        colums = ["ACT", "EVENT", "PSRC",  "PT", "LCN",]; //"TYPE",
         colums.forEach(function(element){
             var pattern =  eval("/[<|]("+element+":[^|]+)/gi");
             var match = pattern.exec(aHtml);
@@ -100,7 +100,7 @@ index.factory('MyData', function($websocket, $sce) {
 
 
         if(!showDetail_) {
-            var ignorepatter = /[<|](REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE):[^|]+/gi;
+            var ignorepatter = /[<|](REALTIME|PROD|VER|PLAT|FROM|SRC|UUID|IDFA|UI|DEV|JAILB|OSV|CIP|DEP|NE|BLUETOOTH_NAME|BLUETOOTH_TYPE|LOCATIONID|BLKCNT|ENDTYPE|PRET|GPS|DOWNLOAD|BG|ONLYWIFI|BLKTM|PROJECT|APP|BR|T|CA|FMT|ISVIP|ISMPU|NE_TYPE|TeamID|DELAY|NOWPLAY|NOWPLAY_TYPE|PTYPE|DES):[^|]*/gi;
             aHtml = aHtml.replace(ignorepatter, "");
         }
         else {
