@@ -10,7 +10,8 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
     $scope.clientIp= "clientIP";
     $scope.clientsTxt = "(" + MyData.clients.length +")";
 
-    var isFileter = false;
+    $scope.isFileter = false;
+    $scope.isnFileter = true;
     $scope.isSimple = false;
 
     //$.toaster({ priority : 'success', title : 'Notice', message : 'Your message here'});
@@ -74,17 +75,31 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
         }
     }
 
+    $scope.matchInArray = function(string, expressions) {
+
+        var len = expressions.length,
+            i = 0;
+        for (; i < len; i++) {
+            if (string.match(expressions[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     $scope.myfilter = function (msg) {
         // console.log("begin filter" + msg);
 
-        if(!isFileter) {
+        if(!$scope.isFileter) {
             return true;
         }
 
         // console.log("begin filter" + msg);
+        var cols = $scope.filterValue.split(",");
 
-        var pattern = new RegExp($scope.filterValue);
-        return msg.content.match(pattern);
+        return $scope.matchInArray(msg.content, cols);
+        // var pattern = new RegExp($scope.filterValue);
+        // return msg.content.match(pattern);
     }
 
     $scope.randomColor = function() {
@@ -97,7 +112,8 @@ angular.module('LogChecker', ['ngWebSocket', 'services.index', 'luegg.directives
     }
 
     $scope.doFilter = function (msg) {
-        isFileter = true;
+        $scope.isFileter = !$scope.isFileter;
+        $scope.isnFileter = !$scope.isnFileter;
     }
 
 })

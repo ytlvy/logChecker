@@ -35,12 +35,14 @@
             <!--<h3 class="demo-panel-title">过滤</h3>-->
             <div class="row demo-row">
                 <div class="col-xs-3 demo-col">
-                  <div class=" has-success col-xs-8 demo-col" style="padding-left: 0px;padding-right: 3px;">
-                    <input type="text" value="" placeholder="VIDEO_LOG" class="form-control" ng-model="filterValue"  />
+                  <div class="tagsinput-primary col-xs-8" style="padding-left: 0px;padding-right: 3px;">
+                  <!--<div class=" has-success col-xs-8 demo-col" style="padding-left: 0px;padding-right: 3px;">-->
+                    <!--<input type="text" value="" placeholder="VIDEO_LOG" class="form-control" ng-model="filterValue"  /> -->
+                    <input name="tagsinput" class="tagsinput" data-role="tagsinput" value="" ng-model="filterValue" />
                     <span class="input-icon fui-check-inverted"></span>
                   </div>
                   <div class="col-xs-4 demo-col" style="padding-left: 0px;padding-right: 0px">
-                      <a href="#fakelink" class="btn btn-block demo-btn btn-primary" ng-click="doFilter()">Filter</a>
+                      <a href="#fakelink" ng-class="{'btn btn-block demo-btn btn-primary': isFileter, 'btn btn-block demo-btn btn-info': isnFileter}" class="" ng-click="doFilter()">Filter</a>
                     </div>
                 </div>
                 
