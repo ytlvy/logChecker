@@ -62,7 +62,7 @@ index.factory('MyData', function($websocket, $sce) {
     };
 
     var randomColor = function() {
-        let colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot','palette-wet-asphalt','palette-midnight-blue','palette-sun-flower','palette-ALIZARIN'];
+        let colors = ['palette-turquoise', 'palette-emerald', 'palette-peter-river', 'palette-amethyst', 'palette-carrot','palette-wet-asphalt','palette-midnight-blue','palette-sun-flower'];
         return colors[Math.floor(Math.random()*colors.length)];
     }
 
@@ -89,7 +89,7 @@ index.factory('MyData', function($websocket, $sce) {
             if(!bShow) return;
         }
 
-        colums = ["ACT", "EVENT", "PSRC",  "PT", "LCN",]; //"TYPE",
+        colums = ["ACT", "EVENT", "PSRC",  "PT", "LCN", "LTYPE",]; //"TYPE",
         colums.forEach(function(element){
             var pattern =  eval("/[<|]("+element+":[^|]+)/gi");
             var match = pattern.exec(aHtml);
