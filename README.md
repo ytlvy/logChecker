@@ -5,37 +5,57 @@
 
 ### install
 
-1. install nodejs and npm
+1. 下载 nodejs 安装包
 
 ```
 https://nodejs.org/zh-cn/
 ```
 
-mac
+2. 打开命令行软件 进入当前目录
+
+比如文件目录
 ```
-brew install npm
+cd ~/Documents/logChecker
 ```
 
-2. install packages
+或者下载目录
+```
+cd ~/Downloads//logChecker
+```
 
+3. 安装必要支持包
 ```
 npm install
+sudo npm -g  install forever
 ```
 
-2. run app
+
+4. 设置执行权限
 
 ```
-npm start
+chmod +x ./st*
 ```
 
-or
+5. run app
 
 ```
 ./start
 ```
 
+6. 打开 浏览器 查看是否服务启动成功
+```
+http://localhost:19909/
+```
 
-### autoLogin
+7. 修改 localhost 为本机局域网 ip
+
+```
+http://192.168.1.108:19909/
+```
+
+
+
+### autoLogin(以下为高级操作不用关)
 
 ```
 npm install -g forever
