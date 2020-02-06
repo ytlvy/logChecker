@@ -13,6 +13,11 @@ https://nodejs.org/zh-cn/
 
 2. 打开命令行软件 进入当前目录
 
+windows电脑切换盘符
+```
+d:
+```
+
 比如文件目录
 ```
 cd ~/Documents/logChecker
@@ -38,6 +43,12 @@ chmod +x ./st*
 
 5. run app
 
+windows 电脑
+```
+npm start
+```
+
+mac 电脑
 ```
 ./start
 ```
