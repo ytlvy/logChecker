@@ -9,7 +9,7 @@
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "js-base64": "^2.5.1",
-    "npm": "^6.11.1",
+    "npm": "^6.14.6",
     "ws": "^7.1.2"
   },
   "devDependencies": {},
