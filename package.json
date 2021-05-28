@@ -10,7 +10,7 @@
     "express-session": "^1.16.2",
     "js-base64": "^2.5.1",
     "npm": "^6.11.1",
-    "ws": "^7.1.2"
+    "ws": "^7.4.6"
   },
   "devDependencies": {},
   "main": "app.js",
